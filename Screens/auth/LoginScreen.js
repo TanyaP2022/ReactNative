@@ -9,8 +9,9 @@ import {
   Platform,
   Button,
 } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
-export default function LoginScreen() {
+export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -24,6 +25,8 @@ export default function LoginScreen() {
   const keyboardHide = () => {
     setIsShowKeyboard(false);
     Keyboard.dismiss();
+
+    navigation.navigate("Home");
 
     console.log("email", email);
     console.log("password", password);
@@ -57,7 +60,9 @@ export default function LoginScreen() {
         <View style={styles.btn}>
           <Button color={"#FFFFFF"} title={"Sign in"} onPress={keyboardHide} />
         </View>
-        <Text style={styles.bodyText}>Don't have an account? Register</Text>
+        <TouchableOpacity onPress={() => navigation.navigate("Registration")}>
+          <Text style={styles.bodyText}>Don't have an account? Register</Text>
+        </TouchableOpacity>
       </View>
     </KeyboardAvoidingView>
   );

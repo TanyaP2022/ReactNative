@@ -9,8 +9,9 @@ import {
   Platform,
   Button,
 } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
-export default function RegistrationScreen() {
+export default function RegistrationScreen({ navigation }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -27,6 +28,8 @@ export default function RegistrationScreen() {
   const keyboardHide = () => {
     setIsShowKeyboard(false);
     Keyboard.dismiss();
+
+    navigation.navigate("Home");
 
     console.log("name", name);
     console.log("email", email);
@@ -69,7 +72,9 @@ export default function RegistrationScreen() {
         <View style={styles.btn}>
           <Button color={"#FFFFFF"} title={"Register"} onPress={keyboardHide} />
         </View>
-        <Text style={styles.bodyText}>Do you have an account? Sign in</Text>
+        <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+          <Text style={styles.bodyText}>Do you have an account? Sign in</Text>
+        </TouchableOpacity>
       </View>
     </KeyboardAvoidingView>
   );
@@ -101,7 +106,7 @@ const styles = StyleSheet.create({
     borderColor: "#E8E8E8",
     borderRadius: 8,
     backgroundColor: "#F6F6F6",
-
+    // fontFamily: "Roboto-Regular",
     fontStyle: "normal",
     fontSize: 16,
     color: "#BDBDBD",
